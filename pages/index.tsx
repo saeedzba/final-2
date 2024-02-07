@@ -1,9 +1,19 @@
-import { ConnectWallet, useContract } from "@thirdweb-dev/react";
+import { CONTRACT_ADDRESSES, ConnectWallet, Web3Button, useContract, useContractWrite } from "@thirdweb-dev/react";
 import { NextPage } from "next";
 import styles from '../styles/Home.module.css';
 import Head from 'next/head';
+import { useState } from "react"; // Import useState hook
+
+import Web3 from 'web3';
+import { contract } from "../const/contract";
+
 const Home: NextPage = () => {
-const { contract } =useContract("0x711809EDddC67f3ad6E6ae02cD7A592e78f4F7e6");
+const { contract } =useContract("0x349F364FD5532C4649EB3A8aB539073f856286Ea");
+// const {
+//    data; 
+
+// }=useContractWrite(contract, "donate()");
+
 
 return (
  
@@ -19,6 +29,22 @@ return (
 
       <main className={styles.main}>
         <ConnectWallet />
+       
+          <div className={styles.buttoncontainer}>
+          
+          <Web3Button
+          theme= "dark"
+          contractAddress="0x349F364FD5532C4649EB3A8aB539073f856286Ea"
+          action={(contract) => {
+            contract.call("donate", [1])
+          }}
+        >
+            
+            Pay
+          </Web3Button>
+
+          </div>
+       
 
         <h1 className={styles.title}>
           Welcome to <a href="">CryptoPayer</a>
